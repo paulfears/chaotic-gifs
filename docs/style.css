@@ -1,0 +1,126 @@
+
+
+.main-content{
+  display:grid;
+  grid-template-columns: none;
+  grid-template-rows: 10% 500px auto;
+  grid-gap: 1px;
+  grid-template-areas: 
+  "frames"
+  "canvas" 
+  "controls";
+}
+
+@media only screen
+  and (min-width: 1000px){
+  /*noraml screens*/
+  .main-content{
+    grid-template-rows: 12% 88%;
+    grid-template-columns: 500px auto;
+
+    grid-template-areas: 
+      "frames frames" 
+      "canvas controls";
+  } 
+}
+
+
+p{
+  display: inline-block;
+}
+.frames-holder{
+  grid-area: frames;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  grid-row-gap: 15px;
+  
+  width: 100%;
+  height: 100%;
+
+}
+.frame{
+  display: none;
+  height: 95%;
+  border: 1px solid black;
+  
+}
+.slider-group{
+  width: 100%;
+  display:inline-block;
+}
+.slider-group button{
+  padding: 10px 15px;
+}
+.canvas-container{
+  width:100%;
+  grid-area: canvas;
+  grid-row-gap: 15px;
+  text-align: center;
+}
+.controls{
+  grid-area: controls;
+  padding: 10px;
+  text-align: center;
+}
+.slider{
+  -webkit-appearance: none;
+  width: 60%;
+  cursor: pointer;
+  height: 10px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #444;
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #444;
+  cursor: pointer;
+}
+.top-buttons{
+  width: 100%;
+  display: inline-block;
+  align-content: center;
+  text-align: center;
+}
+.top-buttons button{
+  width:40%;
+}
+#frames{
+  width: 1px;
+  height: 100%;
+  border: 1px solid black;
+}
+button{
+  border: none;
+  color: white;
+  background-color: #444;
+  margin:2px;
+  padding: 15px 32px;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+canvas{
+  padding: 5px;
+  margin-top: 12px;
+  height: 90%;
+  width: auto;
+  border: 1px solid black;
+  position: relative;
+}
+body{
+  margin: 0px;
+}
