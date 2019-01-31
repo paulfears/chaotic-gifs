@@ -39,14 +39,14 @@ function generate(args = [2.24, 0.43, -.65, -2.43, 1]){
 
 }
 
-function create_gif(delay = 100, bg_color = "white"){
+function create_gif(delay = 100, bg_color = "#fff"){
   let frames = document.getElementsByClassName('frame');
-  let gif = new GIF({workers:2, quality:2, width:600, height:600, bg_color:bg_color});
+  let gif = new GIF({workers:2, quality:2, width:600, height:600, background:bg_color});
   for(let i = 0; i<frames.length; i++){
     gif.addFrame(frames[i], {delay: delay});
   }
   gif.on('finished', function(blob){
-    window.location.href = URL.createObjectURL(blob);
+    window.open(URL.createObjectURL(blob));
   });
   gif.render();
 }
