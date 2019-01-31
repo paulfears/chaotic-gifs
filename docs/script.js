@@ -46,7 +46,7 @@ function create_gif(delay = 100, bg_color = "white"){
     gif.addFrame(frames[i], {delay: delay});
   }
   gif.on('finished', function(blob){
-    window.open(URL.createObjectURL(blob));
+    window.location.href = URL.createObjectURL(blob);
   });
   gif.render();
 }
