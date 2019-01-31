@@ -39,7 +39,7 @@ function generate(args = [2.24, 0.43, -.65, -2.43, 1]){
 
 }
 
-function create_gif(delay = 100, bg_color = "#FFF"){
+function create_gif(delay = 100, bg_color = "white"){
   let frames = document.getElementsByClassName('frame');
   let gif = new GIF({workers:2, quality:2, width:600, height:600, bg_color:bg_color});
   for(let i = 0; i<frames.length; i++){
