@@ -7,6 +7,12 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
+  	<div class="image-output">
+  		<img id="display-image" height="600" width="600"/>
+  		<br>
+  		<button id="exit_viewer">exit</button>
+  	</div>
+
     <div class = "main-content">
 
       <div class="frames-holder">
@@ -21,7 +27,7 @@
 
     <div class="controls">
       <button id="build_button">add frame</button>
-      <button onclick="create_gif()">generate gif</button>
+      <button id="make_gif">generate gif</button>
       <br>
       <p>parameter 1: </p> <p class="arg_disp">2.24</p>
       <br>

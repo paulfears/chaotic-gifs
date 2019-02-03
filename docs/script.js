@@ -5,7 +5,10 @@ function generate(args = [2.24, 0.43, -.65, -2.43, 1]){
   
   let canvas = document.getElementById("canvas");
   let ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width, canvas.height)
+  ctx.clearRect(0,0,canvas.width, canvas.height);
+  ctx.fillStyle = "white";
+  ctx.fillRect(0,0, canvas.width, canvas.height);
+  ctx.fillStyle = "black";
   let xmin = -2
   let xmax = 2
   let ymin = -2
@@ -39,20 +42,50 @@ function generate(args = [2.24, 0.43, -.65, -2.43, 1]){
 
 }
 
+
+
 function create_gif(delay = 100, bg_color = "white"){
-  let frames = document.getElementsByClassName('frame');
-  let gif = new GIF({workers:2, quality:2, width:600, height:600, bg_color:bg_color});
-  for(let i = 0; i<frames.length; i++){
-    gif.addFrame(frames[i], {delay: delay});
-  }
-  gif.on('finished', function(blob){
-    window.open(URL.createObjectURL(blob));
+  return new Promise(function(resolve, reject){
+
+    let frames = document.getElementsByClassName('frame');
+    let gif = new GIF({workers:2, quality:2, width:600, height:600, bg_color:bg_color});
+    for(let i = 1; i<frames.length; i++){
+      gif.addFrame(frames[i], {delay: delay});
+    }
+    gif.on('finished', function(blob){
+      resolve(URL.createObjectURL(blob));
+    });
+    gif.render();
+
   });
-  gif.render();
 }
+
+function build_gif(){
+  create_gif().then(
+    function(new_gif){
+      let output = document.getElementsByClassName("image-output")[0];
+      let output_image_element = document.getElementById("display-image");
+      let all_content = document.getElementsByClassName('main-content')[0];
+      all_content.style.display = "none";
+      output.style.display = "block";
+      output_image_element.src = new_gif;
+    }
+  );
+}
+
+function exit_viewer(){
+  let output = document.getElementsByClassName("image-output")[0];
+  let output_image_element = document.getElementById("display-image");
+  let all_content = document.getElementsByClassName('main-content')[0];
+  all_content.style.display = "grid";
+  output.style.display = "none";
+}
+
 
 build_button = document.getElementById("build_button")
 build_button.addEventListener('click', add_frame);
+exit_viewer_button = document.getElementById("exit_viewer");
+exit_viewer_button.addEventListener('click', exit_viewer);
 function get_computed_style(element, propery_name){
   return new Promise(function(resolve, reject){
     let propery = window.getComputedStyle(element, null).getPropertyValue(propery_name);
@@ -60,6 +93,7 @@ function get_computed_style(element, propery_name){
     window.setTimeout(()=>resolve(propery), 140);
   });
 }
+
 function add_frame(){
   let src = canvas.toDataURL('image/png');
   let frames_container = document.getElementById("frames");
@@ -118,6 +152,8 @@ function resize(){
     }
   });
 }
+let gif_button = document.getElementById('make_gif');
+gif_button.addEventListener('click', build_gif);
 window.addEventListener('resize', resize);
 
 generate()
