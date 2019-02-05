@@ -42,7 +42,6 @@ function generate(args = [2.24, 0.43, -.65, -2.43, 1]){
 
 }
 
-<<<<<<< HEAD
 
 
 function create_gif(delay = 100, bg_color = "white"){
@@ -58,29 +57,23 @@ function create_gif(delay = 100, bg_color = "white"){
     });
     gif.render();
 
-=======
-function create_gif(delay = 100, bg_color = "#fff"){
-  let frames = document.getElementsByClassName('frame');
-  let gif = new GIF({workers:2, quality:2, width:600, height:600, background:bg_color});
-  for(let i = 0; i<frames.length; i++){
-    gif.addFrame(frames[i], {delay: delay});
-  }
-  gif.on('finished', function(blob){
-    window.open(URL.createObjectURL(blob));
->>>>>>> 6162192c5947fd72609397e61bb53455df3a99ae
   });
 }
 
 function build_gif(){
+	let all_content = document.getElementsByClassName('main-content')[0];
+	let progress = document.getElementsByClassName('progress')[0];
+    all_content.style.display = "none";
+    progress.style.display = "block";
   create_gif().then(
-    function(new_gif){
+  	function(new_gif){
+  	  progress.display = "none";
       let output = document.getElementsByClassName("image-output")[0];
       let output_image_element = document.getElementById("display-image");
-      let all_content = document.getElementsByClassName('main-content')[0];
-      all_content.style.display = "none";
+      progress.style.display = "none";
       output.style.display = "block";
       output_image_element.src = new_gif;
-    }
+  }
   );
 }
 
@@ -166,5 +159,13 @@ function resize(){
 let gif_button = document.getElementById('make_gif');
 gif_button.addEventListener('click', build_gif);
 window.addEventListener('resize', resize);
+
+let canvas = document.getElementById("canvas");
+get_computed_style(canvas, "width").then(function(width){
+  canvas.style.width = width;
+  canvas.style.height = width;
+}
+);
+
 
 generate()
