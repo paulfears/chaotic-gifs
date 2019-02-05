@@ -8,20 +8,22 @@
   </head>
   <body>
   	<div class="image-output">
-  		<img id="display-image" height="600" width="600"/>
-  		<br>
-  		<button id="exit_viewer">exit</button>
-  	</div>
-  	<div class="progress-holder">
   		<div class = "progress">
   		</div>
+  		<div class="gif-viewer">
+  			<img id="display-image" height="600" width="600"/>
+  			<br>
+  			<button id="exit_viewer">exit</button>
+  		</div>
   	</div>
-
     <div class = "main-content">
 
       <div class="frames-holder">
       	<div id="frames">
-      		<img src="" class="frame"/>
+      		<div class="frame">
+      			<img src="" class="frame-image"/>
+      			<img src="images/exit.png" class="delete-frame-button" onclick="delete_frame(this)">
+      		</div>
       	</div>
       </div>
 
@@ -77,6 +79,13 @@
       <div class="slider-group">
       <button class="minus_button">-</button>
       <input id="chaos_slider" class="slider" min="-10" step="0.01" value="1" max="10" type="range">
+      <button class="plus_button">+</button>
+      </div>
+      <p>color: </p> <p class="arg_disp">#000000</p>
+      <br>
+      <div class="slider-group">
+      <button class="minus_button">-</button>
+      <input id="color_slider" class="slider" min="0" step="1" value="0" max="16777215" type="range">
       <button class="plus_button">+</button>
       </div>
     </div>
